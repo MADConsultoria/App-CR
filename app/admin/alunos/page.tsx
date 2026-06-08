@@ -186,6 +186,21 @@ function translateCreateMessage(value: string) {
   if (value === "no-course") {
     return "Nenhum curso publicado foi encontrado para matrícula automática.";
   }
+  if (value === "invite-error") {
+    return "Não foi possível enviar o convite pelo Supabase. Verifique os redirects de Auth e os logs do Dockploy.";
+  }
+  if (value === "list-error") {
+    return "Não foi possível consultar os usuários no Supabase Auth. Verifique a service role.";
+  }
+  if (value === "profile-error") {
+    return "O usuário foi criado, mas não foi possível salvar o perfil. Verifique as permissões do banco.";
+  }
+  if (value === "enrollment-error") {
+    return "O usuário foi criado, mas não foi possível matricular na turma.";
+  }
+  if (value === "progress-error") {
+    return "O usuário foi criado, mas não foi possível iniciar a jornada na Fase 1.";
+  }
   return "Não foi possível enviar o convite. Verifique os dados e tente novamente.";
 }
 

@@ -50,30 +50,53 @@ export async function createPlatformUser(formData: FormData) {
     redirect("/admin/alunos?created=no-course");
   }
 
-  const { data: existingUsers } = await supabaseAdmin.auth.admin.listUsers();
+  const { data: existingUsers, error: listUsersError } = await supabaseAdmin.auth.admin.listUsers();
+
+  if (listUsersError) {
+    console.error("createPlatformUser:listUsers", listUsersError);
+    redirect("/admin/alunos?created=list-error");
+  }
+
   const existingUser = existingUsers.users.find((item) => item.email?.toLowerCase() === email);
   const redirectTo = `${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/definir-senha`;
-  const invitedUser =
-    existingUser ||
-    (
-      await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
-        data: { full_name: fullName, role },
-        redirectTo
-      })
-    ).data.user;
+  let invitedUser = existingUser || null;
+
+  if (!invitedUser) {
+    const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
+      data: { full_name: fullName, role },
+      redirectTo
+    });
+
+    if (inviteError) {
+      console.error("createPlatformUser:inviteUserByEmail", {
+        email,
+        redirectTo,
+        message: inviteError.message,
+        status: inviteError.status
+      });
+      redirect("/admin/alunos?created=invite-error");
+    }
+
+    invitedUser = inviteData.user;
+  }
 
   if (!invitedUser?.id) {
     redirect("/admin/alunos?created=error");
   }
 
-  await supabaseAdmin.from("profiles").upsert({
+  const { error: profileError } = await supabaseAdmin.from("profiles").upsert({
     id: invitedUser.id,
     full_name: fullName,
     role,
     updated_at: new Date().toISOString()
   });
 
-  await supabaseAdmin.from("enrollments").upsert(
+  if (profileError) {
+    console.error("createPlatformUser:profileUpsert", profileError);
+    redirect("/admin/alunos?created=profile-error");
+  }
+
+  const { error: enrollmentError } = await supabaseAdmin.from("enrollments").upsert(
     {
       user_id: invitedUser.id,
       course_id: course.id,
@@ -82,7 +105,12 @@ export async function createPlatformUser(formData: FormData) {
     { onConflict: "user_id,course_id" }
   );
 
-  await supabaseAdmin.from("user_journey_progress").upsert(
+  if (enrollmentError) {
+    console.error("createPlatformUser:enrollmentUpsert", enrollmentError);
+    redirect("/admin/alunos?created=enrollment-error");
+  }
+
+  const { error: progressError } = await supabaseAdmin.from("user_journey_progress").upsert(
     {
       user_id: invitedUser.id,
       course_id: course.id,
@@ -91,6 +119,11 @@ export async function createPlatformUser(formData: FormData) {
     },
     { onConflict: "user_id,course_id" }
   );
+
+  if (progressError) {
+    console.error("createPlatformUser:journeyProgressUpsert", progressError);
+    redirect("/admin/alunos?created=progress-error");
+  }
 
   revalidatePath("/admin/alunos");
   redirect(`/admin/alunos?created=${existingUser ? "updated" : "invited"}`);
