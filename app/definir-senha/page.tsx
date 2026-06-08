@@ -10,7 +10,7 @@ export default function SetPasswordPage() {
         <div>
           <p className="eyebrow">Convite de acesso</p>
           <h1>Defina sua senha para começar.</h1>
-          <p>Use o link enviado por e-mail para ativar seu acesso à plataforma.</p>
+          <p>Use o link enviado por e-mail para ativar ou recuperar seu acesso à plataforma.</p>
         </div>
       </section>
 

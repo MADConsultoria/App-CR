@@ -59,13 +59,13 @@ export function SetPasswordForm() {
   }
 
   if (checkingSession) {
-    return <p className="accessNote">Validando convite...</p>;
+    return <p className="accessNote">Validando link...</p>;
   }
 
   if (!hasSession) {
     return (
       <div className="formError">
-        Este link não abriu uma sessão válida. Solicite um novo convite ao administrador.
+        Este link não abriu uma sessão válida. Solicite um novo convite ou envie uma nova recuperação de senha.
       </div>
     );
   }
