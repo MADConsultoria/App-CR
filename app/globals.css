@@ -1,15 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;700&family=Montserrat:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
 
 :root {
-  --background: #101417;
-  --surface: #1c2023;
-  --surface-high: #262a2e;
-  --outline: #554337;
-  --primary: #ffb780;
-  --primary-strong: #e48530;
-  --text: #e0e3e7;
-  --muted: #dbc2b2;
+  --background: #1d2430;
+  --surface: #1d2430;
+  --surface-high: #3f4e57;
+  --outline: rgba(111, 129, 139, 0.7);
+  --primary: #e6862d;
+  --primary-strong: #b8631e;
+  --text: #f8f6f5;
+  --muted: #d8dde0;
+  --soft: #6f818b;
+  --font-heading: Recoleta, Cochin, Georgia, "Times New Roman", serif;
+  --font-body: Montserrat, "Glacial Indifference", Inter, Arial, sans-serif;
 }
 
 * {
@@ -24,11 +27,13 @@ body {
 
 body {
   background:
-    radial-gradient(circle, rgba(85, 67, 55, 0.7) 1px, transparent 1px),
-    linear-gradient(180deg, #0b0e12 0%, #1d2430 35%, #3f4e57 72%, #80898f 100%);
-  background-size: 32px 32px;
+    radial-gradient(circle, rgba(184, 99, 30, 0.42) 1px, transparent 1px),
+    linear-gradient(180deg, #0b0e12 0%, #1c2328 70%, #50595e 100%);
+  background-attachment: fixed;
+  background-repeat: repeat, no-repeat;
+  background-size: 32px 32px, 100% 100%;
   color: var(--text);
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 .material-symbols-outlined {
@@ -67,7 +72,8 @@ a {
 
 h1,
 h2 {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
+  font-weight: 300;
   letter-spacing: 0;
 }
 
@@ -113,7 +119,8 @@ p {
 }
 
 .routeCard strong {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
+  font-weight: 300;
   font-size: 20px;
 }
 
@@ -137,7 +144,7 @@ p {
   background:
     linear-gradient(180deg, rgba(16, 20, 23, 0.1), rgba(16, 20, 23, 0.92)),
     repeating-linear-gradient(135deg, rgba(228, 133, 48, 0.18) 0 12px, transparent 12px 24px),
-    #181c1f;
+    #1d2430;
   border-right: 1px solid rgba(85, 67, 55, 0.8);
   display: grid;
   gap: 96px;
@@ -202,7 +209,7 @@ p {
 
 .field input,
 .field select {
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(162, 140, 126, 0.65);
   border-radius: 4px;
   color: var(--text);
@@ -258,7 +265,7 @@ p {
   background: var(--primary-strong);
   border: 0;
   border-radius: 4px;
-  color: #2f1400;
+  color: #1d2430;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -298,7 +305,7 @@ p {
 }
 
 .sideNav {
-  background: #1c2023;
+  background: #1d2430;
   border-right: 1px solid rgba(85, 67, 55, 0.85);
   display: flex;
   flex-direction: column;
@@ -346,7 +353,7 @@ p {
 
 .navItem.active,
 .navItem:hover {
-  background: #3a4c55;
+  background: #3f4e57;
   border-left-color: var(--primary);
   color: #d2e5f1;
 }
@@ -381,7 +388,7 @@ p {
 
 .avatar {
   background: var(--primary-strong);
-  color: #2f1400;
+  color: #1d2430;
   display: grid;
   font-weight: 800;
   height: 42px;
@@ -412,8 +419,11 @@ p {
 }
 
 .courseTopbar h1 {
+  font-family: Recoleta, Cochin, Georgia, "Times New Roman", serif;
   font-size: 32px;
+  font-weight: 300;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .progressBadge {
@@ -438,7 +448,7 @@ p {
 }
 
 .courseHero {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   border-top: 4px solid var(--primary-strong);
   display: grid;
@@ -450,7 +460,7 @@ p {
 .statusPill,
 .courseStatus {
   background: var(--primary);
-  color: #4e2600;
+  color: #1d2430;
   display: inline-flex;
   font-size: 12px;
   font-weight: 800;
@@ -461,15 +471,17 @@ p {
 }
 
 .courseHero h2 {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
   line-height: 1.05;
   margin: 0 0 14px;
 }
 
 .phaseCard {
-  background: #262a2e;
+  background: #3f4e57;
   border: 1px solid rgba(162, 140, 126, 0.35);
+  box-shadow: none;
   display: grid;
   gap: 10px;
   min-height: 140px;
@@ -477,20 +489,24 @@ p {
 }
 
 .phaseCard.active {
-  background: var(--primary-strong);
-  border-color: var(--primary);
-  color: #2f1400;
+  background: #e6862d;
+  border-color: #e6862d;
+  color: #f8f6f5;
 }
 
 .phaseCard.active .phaseNumber {
-  color: #4e2600;
+  color: #1d2430;
 }
 
 .phaseCard.completed {
-  border-color: rgba(255, 183, 128, 0.6);
+  background: #3f4e57;
+  border-color: rgba(111, 129, 139, 0.7);
+  box-shadow: none;
 }
 
 .phaseCard.locked {
+  background: #3f4e57;
+  box-shadow: none;
   opacity: 0.58;
 }
 
@@ -501,7 +517,7 @@ p {
 }
 
 .phaseNumber {
-  color: var(--primary);
+  color: #e6862d;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -509,9 +525,15 @@ p {
 }
 
 .phaseCard strong {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  color: #f8f6f5;
+  font-family: Montserrat, "Glacial Indifference", Inter, Arial, sans-serif;
   font-size: 21px;
+  font-weight: 600;
   line-height: 1.15;
+}
+
+.phaseCard.active strong {
+  color: #f8f6f5;
 }
 
 .coursesSection {
@@ -546,7 +568,7 @@ p {
 
 .courseCard {
   align-items: center;
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   gap: 20px;
@@ -557,19 +579,20 @@ p {
 
 .courseNumber {
   align-items: center;
-  background: #181c1f;
+  background: #1d2430;
   color: var(--primary);
   display: flex;
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 300;
   height: 72px;
   justify-content: center;
 }
 
 .courseCard h3 {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 24px;
+  font-weight: 300;
   margin: 0 0 8px;
 }
 
@@ -589,8 +612,8 @@ p {
 
 .courseButton {
   align-items: center;
-  background: var(--primary-strong);
-  color: #2f1400;
+  background: #e6862d;
+  color: #1d2430;
   display: flex;
   font-size: 12px;
   font-weight: 800;
@@ -603,7 +626,7 @@ p {
 }
 
 .emptyState {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   justify-items: start;
@@ -643,7 +666,7 @@ p {
 
 .lessonTopbar {
   align-items: center;
-  background: #101417;
+  background: #0b0e12;
   border-bottom: 1px solid rgba(85, 67, 55, 0.85);
   display: flex;
   height: 80px;
@@ -691,7 +714,7 @@ p {
 }
 
 .lessonAvatar {
-  background: #3a4c55;
+  background: #3f4e57;
   border: 1px solid var(--outline);
   display: grid;
   font-weight: 800;
@@ -776,7 +799,7 @@ p {
 
 .videoPlay {
   background: rgba(228, 133, 48, 0.9);
-  color: #4e2600;
+  color: #1d2430;
   display: grid;
   height: 84px;
   left: 50%;
@@ -800,8 +823,9 @@ p {
 }
 
 .videoCaption strong {
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 24px;
+  font-weight: 300;
 }
 
 .videoCaption small {
@@ -865,7 +889,7 @@ p {
 .activityCard,
 .activityEmpty {
   align-items: center;
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   gap: 16px;
@@ -880,8 +904,9 @@ p {
 
 .activityCard strong {
   display: block;
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 20px;
+  font-weight: 300;
   margin-bottom: 6px;
 }
 
@@ -893,7 +918,7 @@ p {
 .activityCard a {
   align-items: center;
   background: var(--primary-strong);
-  color: #2f1400;
+  color: #1d2430;
   display: flex;
   font-size: 12px;
   font-weight: 800;
@@ -907,7 +932,7 @@ p {
 .downloadItem,
 .downloadEmpty {
   align-items: center;
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   gap: 14px;
@@ -929,7 +954,7 @@ p {
 }
 
 .lessonSidebar {
-  background: #181c1f;
+  background: #1d2430;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 80px);
@@ -958,7 +983,7 @@ p {
 }
 
 .miniProgress {
-  background: #313538;
+  background: #6f818b;
   height: 6px;
   overflow: hidden;
   width: 150px;
@@ -981,7 +1006,7 @@ p {
 
 .moduleHeader {
   align-items: center;
-  background: #262a2e;
+  background: #3f4e57;
   display: flex;
   justify-content: space-between;
   padding: 14px 16px;
@@ -1005,11 +1030,11 @@ p {
 }
 
 .sidebarLesson:hover {
-  background: #262a2e;
+  background: #3f4e57;
 }
 
 .sidebarLesson.current {
-  background: #313538;
+  background: #6f818b;
   color: var(--primary);
   font-weight: 800;
 }
@@ -1043,24 +1068,6 @@ p {
 .sidebarLesson span:last-child {
   font-size: 14px;
   line-height: 1.35;
-}
-
-.mentorHelp {
-  background: #101417;
-  border-top: 1px solid rgba(85, 67, 55, 0.85);
-  padding: 16px;
-}
-
-.mentorHelp button {
-  background: var(--primary);
-  border: 0;
-  color: #4e2600;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 800;
-  min-height: 48px;
-  text-transform: uppercase;
-  width: 100%;
 }
 
 .activityPage {
@@ -1120,7 +1127,7 @@ p {
 }
 
 .activityManifesto {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   color: var(--muted);
   font-size: 15px;
@@ -1133,7 +1140,7 @@ p {
 }
 
 .activitySection {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   border-top: 4px solid var(--primary-strong);
   padding: 24px;
@@ -1172,7 +1179,7 @@ p {
 
 .activityField input,
 .activityField textarea {
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(162, 140, 126, 0.65);
   color: var(--text);
   font: inherit;
@@ -1199,7 +1206,7 @@ p {
 
 .booleanGroup label {
   align-items: center;
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(162, 140, 126, 0.45);
   display: flex;
   gap: 8px;
@@ -1215,7 +1222,7 @@ p {
 
 .checkboxField {
   align-items: center;
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(255, 183, 128, 0.45);
   display: flex;
   gap: 10px;
@@ -1264,7 +1271,7 @@ p {
 .activityActions button.primary {
   background: var(--primary-strong);
   border-color: var(--primary-strong);
-  color: #2f1400;
+  color: #1d2430;
 }
 
 .activityActions button:disabled,
@@ -1305,8 +1312,9 @@ p {
 
 .manifestPaper h2 {
   color: #7a5a2f;
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 34px;
+  font-weight: 300;
   margin: 0 0 8px;
 }
 
@@ -1331,8 +1339,9 @@ p {
 
 .manifestText h3 {
   color: #7a5a2f;
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 21px;
+  font-weight: 300;
   margin: 10px 0 0;
 }
 
@@ -1397,7 +1406,7 @@ p {
 }
 
 .adminPanel {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   border-top: 4px solid var(--primary-strong);
   display: grid;
@@ -1430,7 +1439,7 @@ p {
 
 .studentRow {
   align-items: center;
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   gap: 18px;
@@ -1472,8 +1481,9 @@ p {
 
 .studentMetric strong {
   color: var(--primary);
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 24px;
+  font-weight: 300;
 }
 
 .studentActions {
@@ -1487,7 +1497,7 @@ p {
 .studentActions button,
 .mirrorButton {
   align-items: center;
-  background: #262a2e;
+  background: #3f4e57;
   border: 1px solid rgba(255, 183, 128, 0.45);
   color: var(--primary);
   display: inline-flex;
@@ -1527,7 +1537,7 @@ p {
 }
 
 .studentProfileGrid div {
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(162, 140, 126, 0.35);
   display: grid;
   gap: 6px;
@@ -1543,7 +1553,7 @@ p {
 }
 
 .submissionCard {
-  background: #1c2023;
+  background: #1d2430;
   border: 1px solid rgba(85, 67, 55, 0.85);
   display: grid;
   gap: 18px;
@@ -1561,8 +1571,9 @@ p {
 
 .submissionCard header strong {
   display: block;
-  font-family: "Hanken Grotesk", Arial, sans-serif;
+  font-family: var(--font-heading);
   font-size: 22px;
+  font-weight: 300;
   margin-top: 4px;
 }
 
@@ -1581,7 +1592,7 @@ p {
 }
 
 .answerItem {
-  background: #181c1f;
+  background: #1d2430;
   border: 1px solid rgba(162, 140, 126, 0.28);
   display: grid;
   gap: 6px;
@@ -1639,3 +1650,5 @@ p {
     justify-content: flex-start;
   }
 }
+
+

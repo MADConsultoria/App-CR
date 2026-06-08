@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Build to Sell",
+  title: "Construtores de Riqueza",
   description: "Biblioteca de cursos, vídeos e materiais para download"
 };
 

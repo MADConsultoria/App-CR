@@ -121,7 +121,6 @@ export default async function LessonPage({ params }: { params: Promise<LessonRou
           <img alt="CR Mentoria" src="/assets/cr-mentoria-logo.png" />
         </Link>
         <div className="lessonTopActions">
-          <span className="material-symbols-outlined">notifications</span>
           <span className="lessonAvatar">{user.email?.slice(0, 1).toUpperCase()}</span>
         </div>
       </header>
@@ -268,10 +267,6 @@ export default async function LessonPage({ params }: { params: Promise<LessonRou
                 </div>
               </section>
             ))}
-          </div>
-
-          <div className="mentorHelp">
-            <button>Ajuda da mentoria</button>
           </div>
         </aside>
       </main>

@@ -105,7 +105,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
         <header className="courseTopbar">
           <div>
             <p className="eyebrow">Mentoria</p>
-            <h1>Construtores de Riqueza</h1>
+            <h1>CONSTRUTORES DE RIQUEZA</h1>
           </div>
           {mirrorEnabled ? (
             <a className="mirrorButton" href="/admin/alunos">
