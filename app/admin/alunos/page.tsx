@@ -7,11 +7,11 @@ import { createPlatformUser } from "./actions";
 import { DeleteUserForm } from "./delete-user-form";
 
 type AdminStudentsPageProps = {
-  searchParams: Promise<{ created?: string; deleted?: string }>;
+  searchParams: Promise<{ created?: string; deleted?: string; detail?: string }>;
 };
 
 export default async function AdminStudentsPage({ searchParams }: AdminStudentsPageProps) {
-  const { created, deleted } = await searchParams;
+  const { created, deleted, detail } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user }
@@ -104,8 +104,18 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
             <p>Envie o convite pelo Supabase Auth e defina se o perfil será aluno ou administrador.</p>
           </div>
 
-          {created ? <div className="savedNotice">{translateCreateMessage(created)}</div> : null}
-          {deleted ? <div className="savedNotice">{translateDeleteMessage(deleted)}</div> : null}
+          {created ? (
+            <div className="savedNotice">
+              {translateCreateMessage(created)}
+              {detail ? <small>{detail}</small> : null}
+            </div>
+          ) : null}
+          {deleted ? (
+            <div className="savedNotice">
+              {translateDeleteMessage(deleted)}
+              {detail ? <small>{detail}</small> : null}
+            </div>
+          ) : null}
 
           <form action={createPlatformUser} className="adminForm">
             <label className="field">

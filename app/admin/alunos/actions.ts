@@ -7,6 +7,16 @@ import { createClient } from "@/lib/supabase/server";
 
 type UserProfileRole = "student" | "admin";
 
+function redirectWithAdminMessage(param: "created" | "deleted", value: string, message?: string) {
+  const searchParams = new URLSearchParams({ [param]: value });
+
+  if (message) {
+    searchParams.set("detail", message.slice(0, 220));
+  }
+
+  redirect(`/admin/alunos?${searchParams.toString()}`);
+}
+
 async function assertAdmin() {
   const supabase = await createClient();
   const {
@@ -35,7 +45,7 @@ export async function createPlatformUser(formData: FormData) {
   const role: UserProfileRole = requestedRole === "admin" ? "admin" : "student";
 
   if (!email || !fullName) {
-    redirect("/admin/alunos?created=invalid");
+    redirectWithAdminMessage("created", "invalid");
   }
 
   const { data: course } = await supabaseAdmin
@@ -46,15 +56,17 @@ export async function createPlatformUser(formData: FormData) {
     .limit(1)
     .maybeSingle();
 
-  if (!course) {
-    redirect("/admin/alunos?created=no-course");
+  const courseId = course?.id;
+
+  if (!courseId) {
+    redirectWithAdminMessage("created", "no-course");
   }
 
   const { data: existingUsers, error: listUsersError } = await supabaseAdmin.auth.admin.listUsers();
 
   if (listUsersError) {
     console.error("createPlatformUser:listUsers", listUsersError);
-    redirect("/admin/alunos?created=list-error");
+    redirectWithAdminMessage("created", "list-error", listUsersError.message);
   }
 
   const existingUser = existingUsers.users.find((item) => item.email?.toLowerCase() === email);
@@ -74,18 +86,20 @@ export async function createPlatformUser(formData: FormData) {
         message: inviteError.message,
         status: inviteError.status
       });
-      redirect("/admin/alunos?created=invite-error");
+      redirectWithAdminMessage("created", "invite-error", inviteError.message);
     }
 
     invitedUser = inviteData.user;
   }
 
-  if (!invitedUser?.id) {
-    redirect("/admin/alunos?created=error");
+  const createdUserId = invitedUser?.id;
+
+  if (!createdUserId) {
+    redirectWithAdminMessage("created", "error");
   }
 
   const { error: profileError } = await supabaseAdmin.from("profiles").upsert({
-    id: invitedUser.id,
+    id: createdUserId,
     full_name: fullName,
     role,
     updated_at: new Date().toISOString()
@@ -93,13 +107,13 @@ export async function createPlatformUser(formData: FormData) {
 
   if (profileError) {
     console.error("createPlatformUser:profileUpsert", profileError);
-    redirect("/admin/alunos?created=profile-error");
+    redirectWithAdminMessage("created", "profile-error", profileError.message);
   }
 
   const { error: enrollmentError } = await supabaseAdmin.from("enrollments").upsert(
     {
-      user_id: invitedUser.id,
-      course_id: course.id,
+      user_id: createdUserId,
+      course_id: courseId,
       granted_by: adminUser.id
     },
     { onConflict: "user_id,course_id" }
@@ -107,13 +121,13 @@ export async function createPlatformUser(formData: FormData) {
 
   if (enrollmentError) {
     console.error("createPlatformUser:enrollmentUpsert", enrollmentError);
-    redirect("/admin/alunos?created=enrollment-error");
+    redirectWithAdminMessage("created", "enrollment-error", enrollmentError.message);
   }
 
   const { error: progressError } = await supabaseAdmin.from("user_journey_progress").upsert(
     {
-      user_id: invitedUser.id,
-      course_id: course.id,
+      user_id: createdUserId,
+      course_id: courseId,
       current_phase_number: 1,
       updated_at: new Date().toISOString()
     },
@@ -122,11 +136,11 @@ export async function createPlatformUser(formData: FormData) {
 
   if (progressError) {
     console.error("createPlatformUser:journeyProgressUpsert", progressError);
-    redirect("/admin/alunos?created=progress-error");
+    redirectWithAdminMessage("created", "progress-error", progressError.message);
   }
 
   revalidatePath("/admin/alunos");
-  redirect(`/admin/alunos?created=${existingUser ? "updated" : "invited"}`);
+  redirectWithAdminMessage("created", existingUser ? "updated" : "invited");
 }
 
 export async function deletePlatformUser(formData: FormData) {
@@ -135,19 +149,19 @@ export async function deletePlatformUser(formData: FormData) {
   const userId = String(formData.get("user_id") || "");
 
   if (!userId) {
-    redirect("/admin/alunos?deleted=invalid");
+    redirectWithAdminMessage("deleted", "invalid");
   }
 
   if (userId === adminUser.id) {
-    redirect("/admin/alunos?deleted=self");
+    redirectWithAdminMessage("deleted", "self");
   }
 
   const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
 
   if (error) {
-    redirect("/admin/alunos?deleted=error");
+    redirectWithAdminMessage("deleted", "error", error.message);
   }
 
   revalidatePath("/admin/alunos");
-  redirect("/admin/alunos?deleted=success");
+  redirectWithAdminMessage("deleted", "success");
 }

@@ -1097,11 +1097,21 @@ p {
   background: rgba(228, 133, 48, 0.12);
   border: 1px solid rgba(228, 133, 48, 0.55);
   color: var(--primary);
+  display: grid;
+  gap: 6px;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.05em;
   padding: 12px;
   text-transform: uppercase;
+}
+
+.savedNotice small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .activityForm {
