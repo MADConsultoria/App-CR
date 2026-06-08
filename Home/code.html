@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Build to Sell - Trilha de Aprendizado</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .construction-grid {
+            background-image: radial-gradient(circle, #554337 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .stripes {
+            background: repeating-linear-gradient(
+                45deg,
+                #e48530,
+                #e48530 10px,
+                #ffb780 10px,
+                #ffb780 20px
+            );
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#a28c7e",
+                    "primary-container": "#e48530",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#363a3d",
+                    "on-primary-fixed-variant": "#6f3800",
+                    "on-background": "#e0e3e7",
+                    "outline-variant": "#554337",
+                    "on-tertiary": "#24323b",
+                    "on-secondary-fixed": "#0c1e26",
+                    "on-primary-fixed": "#2f1400",
+                    "surface-variant": "#313538",
+                    "secondary-fixed": "#d2e5f1",
+                    "on-primary": "#4e2600",
+                    "secondary": "#b7c9d4",
+                    "on-secondary-container": "#a9bbc6",
+                    "surface-dim": "#101417",
+                    "on-tertiary-fixed": "#0e1d25",
+                    "on-secondary-fixed-variant": "#384952",
+                    "surface-container-highest": "#313538",
+                    "on-surface-variant": "#dbc2b2",
+                    "tertiary-fixed-dim": "#b9c9d4",
+                    "on-secondary": "#21333b",
+                    "secondary-container": "#3a4c55",
+                    "primary-fixed": "#ffdcc4",
+                    "on-tertiary-container": "#27363f",
+                    "primary-fixed-dim": "#ffb780",
+                    "tertiary": "#b9c9d4",
+                    "inverse-on-surface": "#2d3134",
+                    "background": "#101417",
+                    "surface-container": "#1c2023",
+                    "primary": "#ffb780",
+                    "tertiary-container": "#8f9fa9",
+                    "on-primary-container": "#542900",
+                    "surface-container-high": "#262a2e",
+                    "surface-tint": "#ffb780",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e0e3e7",
+                    "tertiary-fixed": "#d5e5f0",
+                    "surface-container-lowest": "#0b0f12",
+                    "surface": "#101417",
+                    "secondary-fixed-dim": "#b7c9d4",
+                    "surface-container-low": "#181c1f",
+                    "on-tertiary-fixed-variant": "#3a4952",
+                    "inverse-primary": "#924c00",
+                    "on-surface": "#e0e3e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "48px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "xxl": "80px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar Anchor -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant flex flex-col p-md gap-md z-40 hidden md:flex">
+<div class="mb-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Build to Sell</h1>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-sm p-sm rounded bg-secondary-container text-on-secondary-container border-l-4 border-primary transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="font-label-caps text-label-caps uppercase">Learning Path</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-caps text-label-caps uppercase">My Projects</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-caps text-label-caps uppercase">Resources</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-caps text-label-caps uppercase">Mentors</span>
+</a>
+</div>
+<div class="pt-md border-t border-outline-variant flex flex-col gap-xs">
+<div class="flex items-center gap-sm mb-md px-xs">
+<img alt="User profile" class="w-10 h-10 rounded shadow-md border border-outline-variant" data-alt="A professional portrait of a successful real estate entrepreneur in his late 30s, wearing a crisp navy polo shirt. The lighting is dramatic and warm, suggestive of an office at sunset. The background is slightly blurred, showing architectural blueprints and a glass window overlooking a construction site. The overall aesthetic is industrious, high-stakes, and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkmFRhRyN7b_7p4uA46MVBlKj_-mhQ14AYa4Q0lm-lNRPbSIwJ8nvcb50BDmUmbtcVaT-zhx8zO_YMqHqu33BrZzEXEkkDXe1oSlm7Bbn32Rc780fEf1MJEuVt29nIF4pKo2PomhMJ4A5Rs3iLYUnFeS-4YCvvKB_KEaxma9KF60kMV-Jt_m-p-t70rTeDFDkE206Sv4Z320c4u2FOqRbiixQcxoYi1EvILtLn0Bj-OAWHYmEhl-orD-TUa4zLcfHmvV_gL3MnOCUd"/>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface">RODRIGO SILVA</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Phase 1: Founder</p>
+</div>
+</div>
+<a class="flex items-center gap-sm p-sm rounded text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps uppercase">Settings</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded text-on-surface-variant hover:bg-surface-variant transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps uppercase">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 min-h-screen construction-grid">
+<!-- TopAppBar Anchor -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant z-30">
+<div class="flex justify-between items-center px-lg py-md max-w-[1280px] mx-auto">
+<div class="flex items-center gap-md">
+<span class="md:hidden material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Trilha Estratégica</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex items-center gap-sm px-md py-xs bg-surface-container-low border border-outline-variant rounded">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+<span class="font-label-caps text-label-caps text-on-surface">PROGRESSO: 14%</span>
+<div class="w-32 h-2 bg-surface-variant rounded overflow-hidden ml-sm">
+<div class="w-[14%] h-full bg-primary-container"></div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<section class="max-w-[1280px] mx-auto px-lg py-xl">
+<!-- Hero Bento Header -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<div class="md:col-span-2 bg-surface-container border border-outline-variant p-lg relative overflow-hidden flex flex-col justify-end min-h-[300px]">
+<div class="absolute top-0 left-0 w-full h-1 stripes opacity-30"></div>
+<div class="relative z-10">
+<span class="inline-block bg-primary text-on-primary font-label-caps text-label-caps px-sm py-xs mb-md">EM ANDAMENTO</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">A Jornada do Construtor de Elite</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">Domine cada fase da incorporação, do diagnóstico comportamental à escala de investidores. Sua riqueza é construída tijolo por tijolo.</p>
+</div>
+</div>
+<div class="bg-surface-container-high border border-outline-variant p-lg flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="monetization_on" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-label-caps text-label-caps text-primary border border-primary px-xs">FASE 1</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-xs">Next Level</h4>
+<p class="text-on-surface-variant text-sm">Desbloqueie o Encontro 5 após completar o quiz de viabilidade do Encontro 4.</p>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-caps py-sm uppercase font-bold hover:brightness-110 active:scale-95 transition-all">Continuar Trilha</button>
+</div>
+</div>
+<!-- Content Grid/List -->
+<div class="space-y-md">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-md text-headline-md border-l-4 border-primary pl-md">CRONOGRAMA DE ENCONTROS</h3>
+<div class="flex gap-sm">
+<button class="p-xs border border-outline-variant text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined" data-icon="grid_view">grid_view</span></button>
+<button class="p-xs border border-outline-variant bg-surface-variant text-primary"><span class="material-symbols-outlined" data-icon="view_list">view_list</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-sm">
+<!-- Encounter Items Generation -->
+<!-- Concluído -->
+<div class="group flex items-center bg-surface-container border border-outline-variant hover:border-primary transition-all cursor-pointer">
+<div class="w-20 h-20 flex-shrink-0 flex flex-col items-center justify-center border-r border-outline-variant bg-surface-container-low text-on-surface-variant group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="font-label-caps text-[10px]">01</span>
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="px-lg flex-1 flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h5 class="font-headline-md text-on-surface text-lg">Abertura e visão do jogo imobiliário</h5>
+<p class="text-sm text-primary font-label-caps">CONCLUÍDO</p>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden md:flex flex-col items-end">
+<span class="text-xs text-on-surface-variant">Visto em</span>
+<span class="text-sm font-bold">12 Out, 2023</span>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+</div>
+<!-- Disponível/Atual -->
+<div class="group flex items-center bg-surface-container-highest border-l-8 border-primary border-y border-r border-outline-variant shadow-lg transition-all cursor-pointer">
+<div class="w-20 h-20 flex-shrink-0 flex flex-col items-center justify-center border-r border-outline-variant bg-primary-container text-on-primary-container">
+<span class="font-label-caps text-[10px]">02</span>
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="px-lg flex-1 flex flex-col md:flex-row md:items-center justify-between gap-md py-md">
+<div>
+<h5 class="font-headline-md text-on-surface text-lg">Perfil comportamental aplicado à Construção de Riqueza</h5>
+<p class="text-sm text-primary font-label-caps flex items-center gap-xs">
+<span class="block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                    EM DESTAQUE
+                                </p>
+</div>
+<button class="bg-primary text-on-primary font-label-caps px-lg py-sm text-sm hover:brightness-110">ACESSAR AULA</button>
+</div>
+</div>
+<!-- Available (Next) -->
+<div class="group flex items-center bg-surface-container border border-outline-variant hover:border-outline transition-all cursor-pointer">
+<div class="w-20 h-20 flex-shrink-0 flex flex-col items-center justify-center border-r border-outline-variant bg-surface-container-low text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="font-label-caps text-[10px]">03</span>
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+</div>
+<div class="px-lg flex-1 flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h5 class="font-headline-md text-on-surface text-lg opacity-80">Diagnóstico operacional e posicionamento do mentorado</h5>
+<p class="text-sm text-on-surface-variant font-label-caps">DISPONÍVEL</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Blocked Pattern (Rest of encounters) -->
+<!-- Simulating a loop for a few more for visual depth -->
+<div class="group flex items-center bg-surface-container/50 border border-outline-variant opacity-60">
+<div class="w-20 h-20 flex-shrink-0 flex flex-col items-center justify-center border-r border-outline-variant bg-surface-container-low text-on-surface-variant">
+<span class="font-label-caps text-[10px]">04</span>
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div class="px-lg flex-1 flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h5 class="font-headline-md text-on-surface text-lg">Fundamentos do crédito inteligente</h5>
+<p class="text-sm text-on-surface-variant font-label-caps">BLOQUEADO</p>
+</div>
+<div class="flex items-center gap-xs text-xs text-on-surface-variant uppercase">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span>
+                                Libera em 2 dias
+                            </div>
+</div>
+</div>
+<div class="group flex items-center bg-surface-container/50 border border-outline-variant opacity-60">
+<div class="w-20 h-20 flex-shrink-0 flex flex-col items-center justify-center border-r border-outline-variant bg-surface-container-low text-on-surface-variant">
+<span class="font-label-caps text-[10px]">05</span>
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div class="px-lg flex-1 flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h5 class="font-headline-md text-on-surface text-lg">Clareza de objetivos, sonhos e metas</h5>
+<p class="text-sm text-on-surface-variant font-label-caps">BLOQUEADO</p>
+</div>
+</div>
+</div>
+<!-- Placeholder for the rest (28 encounters total) -->
+<div class="py-xl flex flex-col items-center justify-center border border-dashed border-outline-variant rounded-lg bg-surface-container-low/20">
+<span class="material-symbols-outlined text-primary text-4xl mb-md" data-icon="expand_more">expand_more</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-lg uppercase tracking-widest">Ver mais 23 encontros</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md w-full px-lg max-w-4xl opacity-40 grayscale">
+<div class="p-md border border-outline-variant text-center bg-surface-container">
+<span class="font-label-caps text-xs">ENC 06</span>
+<p class="text-xs truncate mt-xs">Visão do Banco</p>
+</div>
+<div class="p-md border border-outline-variant text-center bg-surface-container">
+<span class="font-label-caps text-xs">ENC 07</span>
+<p class="text-xs truncate mt-xs">Viabilidade Econ.</p>
+</div>
+<div class="p-md border border-outline-variant text-center bg-surface-container">
+<span class="font-label-caps text-xs">ENC 08</span>
+<p class="text-xs truncate mt-xs">Viabilidade Imob.</p>
+</div>
+<div class="p-md border border-outline-variant text-center bg-surface-container">
+<span class="font-label-caps text-xs">ENC 09</span>
+<p class="text-xs truncate mt-xs">Escolha Terreno</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contextual Widget Section -->
+<section class="max-w-[1280px] mx-auto px-lg pb-xxl grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<div class="bg-surface-container border border-outline-variant p-lg flex gap-md items-start">
+<div class="w-16 h-16 bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h6 class="font-headline-md text-lg text-on-surface mb-xs">Resumo da Viabilidade</h6>
+<p class="text-on-surface-variant text-sm mb-md">Confira os dados consolidados das suas análises de terreno dos encontros anteriores.</p>
+<a class="text-primary font-bold text-sm underline hover:text-primary-container transition-colors" href="#">Abrir Dashboard Financeiro</a>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-lg flex gap-md items-start">
+<div class="w-16 h-16 bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="forum">forum</span>
+</div>
+<div>
+<h6 class="font-headline-md text-lg text-on-surface mb-xs">Fórum de Mentoria</h6>
+<p class="text-on-surface-variant text-sm mb-md">Tire suas dúvidas sobre o Encontro 2 diretamente com os especialistas.</p>
+<a class="text-primary font-bold text-sm underline hover:text-primary-container transition-colors" href="#">Entrar na Comunidade</a>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Anchor (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-md py-sm bg-surface-container-high border-t-2 border-outline-variant z-50 md:hidden">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg p-xs transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-[10px] uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-caps text-[10px] uppercase">Lessons</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-label-caps text-[10px] uppercase">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] uppercase">Profile</span>
+</a>
+</nav>
+<!-- Contextual FAB (Only for Home/Learning Path) -->
+<button class="fixed bottom-24 right-lg md:bottom-lg md:right-lg w-14 h-14 bg-primary-container text-on-primary-container shadow-2xl flex items-center justify-center border-t-2 border-l-2 border-white/20 transition-transform hover:scale-110 active:scale-95 z-40">
+<span class="material-symbols-outlined" data-icon="add_business">add_business</span>
+</button>
+<script>
+        // Micro-interaction: Update progress bar on hover (mock)
+        const encounterItems = document.querySelectorAll('.group.cursor-pointer');
+        encounterItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Subtle scale or interaction feedback
+            });
+        });
+    </script>
+</body></html>

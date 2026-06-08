@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Build to Sell</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .construction-pattern {
+            background-image: radial-gradient(circle at 2px 2px, #554337 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#a28c7e",
+                      "primary-container": "#e48530",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#363a3d",
+                      "on-primary-fixed-variant": "#6f3800",
+                      "on-background": "#e0e3e7",
+                      "outline-variant": "#554337",
+                      "on-tertiary": "#24323b",
+                      "on-secondary-fixed": "#0c1e26",
+                      "on-primary-fixed": "#2f1400",
+                      "surface-variant": "#313538",
+                      "secondary-fixed": "#d2e5f1",
+                      "on-primary": "#4e2600",
+                      "secondary": "#b7c9d4",
+                      "on-secondary-container": "#a9bbc6",
+                      "surface-dim": "#101417",
+                      "on-tertiary-fixed": "#0e1d25",
+                      "on-secondary-fixed-variant": "#384952",
+                      "surface-container-highest": "#313538",
+                      "on-surface-variant": "#dbc2b2",
+                      "tertiary-fixed-dim": "#b9c9d4",
+                      "on-secondary": "#21333b",
+                      "secondary-container": "#3a4c55",
+                      "primary-fixed": "#ffdcc4",
+                      "on-tertiary-container": "#27363f",
+                      "primary-fixed-dim": "#ffb780",
+                      "tertiary": "#b9c9d4",
+                      "inverse-on-surface": "#2d3134",
+                      "background": "#101417",
+                      "surface-container": "#1c2023",
+                      "primary": "#ffb780",
+                      "tertiary-container": "#8f9fa9",
+                      "on-primary-container": "#542900",
+                      "surface-container-high": "#262a2e",
+                      "surface-tint": "#ffb780",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "inverse-surface": "#e0e3e7",
+                      "tertiary-fixed": "#d5e5f0",
+                      "surface-container-lowest": "#0b0f12",
+                      "surface": "#101417",
+                      "secondary-fixed-dim": "#b7c9d4",
+                      "surface-container-low": "#181c1f",
+                      "on-tertiary-fixed-variant": "#3a4952",
+                      "inverse-primary": "#924c00",
+                      "on-surface": "#e0e3e7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "48px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "xxl": "80px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Hanken Grotesk"],
+                      "label-caps": ["Inter"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex items-center justify-center">
+<main class="w-full min-h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
+<!-- Left Side: Visual Narrative -->
+<section class="hidden md:flex md:col-span-7 lg:col-span-8 relative flex-col justify-end p-xl overflow-hidden bg-surface-dim">
+<img alt="Construction Site" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="A high-end architectural construction site at dusk, featuring raw concrete structures and steel framing against a dramatic sky. The lighting is low-key and cinematic, with warm industrial work lights contrasting against the cool slate tones of the evening. The scene embodies professional real estate development and structural integrity, utilizing a dark corporate aesthetic with high-contrast shadows and sharp architectural lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6_QoasCQ8ahssxFjJWm_hz2vV-sU3h8i3-C9IU22UezhyD8zr936ti9ld32K3kt7bgFAWCaeKHyNkDtynUvitEKEAEsU-_Kr0cLFxmEr6w6nuZK0LQJl0nQVigzdU42iZFgJFuubctaKZktvg_qVh50gHxE29A233lSoc2hShOdS2z97V2gVG-k1iJbkK7i_4x3JvHks5fJXEstpgf_zNdgJJYBbT4xQqFdIz5FASB5MmlMBgsHak3fpgHowMGJex28kvQ9leCuh5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+<div class="relative z-10 space-y-md max-w-2xl">
+<div class="w-12 h-1 bg-primary-container mb-md"></div>
+<h1 class="font-display-lg text-display-lg text-on-background tracking-tight">
+                    Construa para <br/><span class="text-primary-container">Lucrar.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    A metodologia definitiva para investidores imobiliários e construtores que buscam escala, precisão técnica e rentabilidade máxima no mercado brasileiro.
+                </p>
+<div class="flex gap-lg mt-xl pt-lg border-t border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase">Fase Atual</span>
+<span class="font-headline-md text-headline-md">Fundação &amp; Estrutura</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase">Projetos Ativos</span>
+<span class="font-headline-md text-headline-md">1.240+</span>
+</div>
+</div>
+</div>
+<!-- Decorative Mesh -->
+<div class="absolute top-0 right-0 w-64 h-64 construction-pattern opacity-10 pointer-events-none"></div>
+</section>
+<!-- Right Side: Login Form Container -->
+<section class="col-span-1 md:col-span-5 lg:col-span-4 bg-surface flex flex-col justify-center items-center px-lg py-xl border-l border-outline-variant/20 shadow-2xl relative">
+<div class="w-full max-w-sm flex flex-col gap-xl">
+<!-- Brand Header -->
+<header class="flex flex-col gap-xs">
+<div class="flex items-center gap-sm mb-xs">
+<div class="bg-primary-container p-xs rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Build to Sell</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Bem-vindo de volta</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Acesse seu painel de gerenciamento de obras.</p>
+</header>
+<!-- Form -->
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="email">E-mail Corporativo</label>
+<div class="relative group">
+<input class="w-full bg-surface-container border border-outline-variant px-md py-sm rounded-DEFAULT text-on-surface focus:ring-0 focus:border-primary-container transition-all placeholder:text-on-surface-variant/40" id="email" placeholder="nome@empresa.com.br" type="email"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary-container transition-colors">mail</span>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="password">Senha</label>
+<a class="font-label-caps text-label-caps text-primary-container hover:text-primary transition-colors hover:underline" href="#">Esqueci minha senha</a>
+</div>
+<div class="relative group">
+<input class="w-full bg-surface-container border border-outline-variant px-md py-sm rounded-DEFAULT text-on-surface focus:ring-0 focus:border-primary-container transition-all placeholder:text-on-surface-variant/40" id="password" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary-container transition-colors">lock</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container hover:bg-orange-600 text-white font-bold py-md rounded-DEFAULT shadow-lg transition-all active:scale-[0.98] mt-sm flex items-center justify-center gap-sm">
+                        Entrar na Plataforma
+                        <span class="material-symbols-outlined">trending_up</span>
+</button>
+<!-- Divider -->
+<div class="flex items-center gap-md py-md">
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OU ACESSE COM</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm border border-outline-variant py-sm px-md rounded-DEFAULT hover:bg-surface-variant transition-colors">
+<span class="font-label-caps text-label-caps text-on-surface">GOOGLE</span>
+</button>
+<button class="flex items-center justify-center gap-sm border border-outline-variant py-sm px-md rounded-DEFAULT hover:bg-surface-variant transition-colors">
+<span class="font-label-caps text-label-caps text-on-surface">LINKEDIN</span>
+</button>
+</div>
+</form>
+<!-- Footer Sign up -->
+<footer class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Não possui uma conta? 
+                        <a class="text-primary-container font-bold hover:underline" href="#">Solicitar acesso</a>
+</p>
+</footer>
+</div>
+<!-- Absolute Bottom Disclaimer -->
+<div class="absolute bottom-md left-0 w-full text-center px-lg">
+<p class="text-[10px] text-on-surface-variant/40 uppercase tracking-widest font-label-caps">
+                    © 2024 Build to Sell Inc. | Gestão de Ativos &amp; Mentoria de Alta Performance
+                </p>
+</div>
+</section>
+</main>
+<script>
+        // Simple micro-interaction for the login button
+        const loginBtn = document.querySelector('button');
+        loginBtn.addEventListener('mouseenter', () => {
+            console.log('Interação: Preparando para acessar ambiente seguro.');
+        });
+        
+        // Add smooth input focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body></html>
