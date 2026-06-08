@@ -95,3 +95,26 @@ export async function createPlatformUser(formData: FormData) {
   revalidatePath("/admin/alunos");
   redirect(`/admin/alunos?created=${existingUser ? "updated" : "invited"}`);
 }
+
+export async function deletePlatformUser(formData: FormData) {
+  const adminUser = await assertAdmin();
+  const supabaseAdmin = createAdminClient();
+  const userId = String(formData.get("user_id") || "");
+
+  if (!userId) {
+    redirect("/admin/alunos?deleted=invalid");
+  }
+
+  if (userId === adminUser.id) {
+    redirect("/admin/alunos?deleted=self");
+  }
+
+  const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
+
+  if (error) {
+    redirect("/admin/alunos?deleted=error");
+  }
+
+  revalidatePath("/admin/alunos");
+  redirect("/admin/alunos?deleted=success");
+}

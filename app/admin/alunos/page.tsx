@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { signOut } from "@/app/cursos/actions";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import { signOut } from "@/app/cursos/actions";
 import { createPlatformUser } from "./actions";
+import { DeleteUserForm } from "./delete-user-form";
 
 type AdminStudentsPageProps = {
-  searchParams: Promise<{ created?: string }>;
+  searchParams: Promise<{ created?: string; deleted?: string }>;
 };
 
 export default async function AdminStudentsPage({ searchParams }: AdminStudentsPageProps) {
-  const { created } = await searchParams;
+  const { created, deleted } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user }
@@ -104,6 +105,7 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
           </div>
 
           {created ? <div className="savedNotice">{translateCreateMessage(created)}</div> : null}
+          {deleted ? <div className="savedNotice">{translateDeleteMessage(deleted)}</div> : null}
 
           <form action={createPlatformUser} className="adminForm">
             <label className="field">
@@ -137,13 +139,14 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
             {(profiles || []).map((student) => {
               const stats = submissionStats.get(student.id) || { drafts: 0, submitted: 0 };
               const progress = Math.round((stats.submitted / totalPublishedActivities) * 100);
+              const studentName = student.full_name || "Usuário sem nome";
 
               return (
                 <article className="studentRow" key={student.id}>
                   <div className="studentIdentity">
-                    <div className="avatar">{(student.full_name || "U").slice(0, 1).toUpperCase()}</div>
+                    <div className="avatar">{studentName.slice(0, 1).toUpperCase()}</div>
                     <div>
-                      <strong>{student.full_name || "Usuário sem nome"}</strong>
+                      <strong>{studentName}</strong>
                       <span>{emailById.get(student.id)}</span>
                     </div>
                   </div>
@@ -158,6 +161,7 @@ export default async function AdminStudentsPage({ searchParams }: AdminStudentsP
                   <div className="studentActions">
                     <Link href={`/admin/alunos/${student.id}`}>Ver dados</Link>
                     {courseId ? <Link href={`/cursos?aluno=${student.id}`}>Visualizar como aluno</Link> : null}
+                    <DeleteUserForm disabled={student.id === user.id} userId={student.id} userName={studentName} />
                   </div>
                 </article>
               );
@@ -183,4 +187,17 @@ function translateCreateMessage(value: string) {
     return "Nenhum curso publicado foi encontrado para matrícula automática.";
   }
   return "Não foi possível enviar o convite. Verifique os dados e tente novamente.";
+}
+
+function translateDeleteMessage(value: string) {
+  if (value === "success") {
+    return "Usuário excluído com sucesso.";
+  }
+  if (value === "self") {
+    return "Você não pode excluir o próprio usuário administrador.";
+  }
+  if (value === "invalid") {
+    return "Usuário inválido para exclusão.";
+  }
+  return "Não foi possível excluir o usuário. Verifique no Supabase e tente novamente.";
 }

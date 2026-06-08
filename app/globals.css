@@ -1474,6 +1474,7 @@ p {
 }
 
 .studentActions a,
+.studentActions button,
 .mirrorButton {
   align-items: center;
   background: #262a2e;
@@ -1487,6 +1488,26 @@ p {
   padding: 0 12px;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.studentActions form {
+  display: inline-flex;
+}
+
+.studentActions button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.studentActions .dangerAction {
+  border-color: rgba(255, 107, 87, 0.55);
+  color: #ffb4ab;
+}
+
+.studentActions .dangerAction:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.35);
+  opacity: 0.5;
 }
 
 .studentProfileGrid {
