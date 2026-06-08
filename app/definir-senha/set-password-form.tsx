@@ -17,14 +17,26 @@ export function SetPasswordForm() {
     async function prepareSession() {
       const supabase = createClient();
       const code = new URLSearchParams(window.location.search).get("code");
+      const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+      const accessToken = hashParams.get("access_token");
+      const refreshToken = hashParams.get("refresh_token");
 
       if (code) {
         await supabase.auth.exchangeCodeForSession(code);
+      } else if (accessToken && refreshToken) {
+        await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken
+        });
       }
 
       const { data } = await supabase.auth.getSession();
       setHasSession(Boolean(data.session));
       setCheckingSession(false);
+
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
     }
 
     prepareSession();
