@@ -53,9 +53,9 @@ export default async function LessonPage({ params }: { params: Promise<LessonRou
   }
 
   const currentIndex = lessons.findIndex((lesson) => lesson.id === currentLesson.id);
-  const unlockedLessons = lessons.filter((lesson) => lesson.position < 3);
+  const unlockedLessons = lessons.filter((lesson) => lesson.position <= 3);
 
-  if (currentLesson.position >= 3) {
+  if (currentLesson.position > 3) {
     redirect(`/cursos/${course.slug}/aulas/${unlockedLessons[0]?.id || "inicio"}`);
   }
 
@@ -227,7 +227,7 @@ export default async function LessonPage({ params }: { params: Promise<LessonRou
                     .map((lesson) => {
                       const isCurrent = lesson.id === currentLesson.id;
                       const isCompleted = lessons.findIndex((item) => item.id === lesson.id) < currentIndex;
-                      const isLocked = lesson.position >= 3;
+                      const isLocked = lesson.position > 3;
                       const activityState = getLessonActivityState(lesson);
                       const lessonIcon =
                         activityState === "submitted"
