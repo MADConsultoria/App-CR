@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { saveActivitySubmission } from "./actions";
 
@@ -29,6 +30,11 @@ type ActivityFormProps = {
   submissionStatus?: string;
 };
 
+type SelectOption = {
+  label: string;
+  value: string;
+};
+
 export function ActivityForm({ courseSlug, lessonId, activityId, questions, submissionStatus }: ActivityFormProps) {
   const isManifesto = questions.some((question) => question.question_key === "assinatura_termo");
   const isLocked = submissionStatus === "submitted" || submissionStatus === "reviewed";
@@ -55,7 +61,9 @@ export function ActivityForm({ courseSlug, lessonId, activityId, questions, subm
     return (
       <ManifestoForm
         action={action}
+        courseSlug={courseSlug}
         isLocked={isLocked}
+        lessonId={lessonId}
         questions={questions}
         submissionStatus={submissionStatus}
       />
@@ -75,9 +83,19 @@ export function ActivityForm({ courseSlug, lessonId, activityId, questions, subm
     <form action={action} className="activityForm">
       {submissionStatus ? <div className="submissionStatus">Status: {translateStatus(submissionStatus)}</div> : null}
 
-      {Object.entries(groupedQuestions).map(([section, sectionQuestions]) => (
+      {Object.entries(groupedQuestions).map(([section, sectionQuestions], sectionIndex) => (
         <section className="activitySection" key={section}>
-          <h2>{section}</h2>
+          <div className="activitySectionHeader">
+            <span className="activitySectionIcon">
+              <span className="material-symbols-outlined">{getSectionIcon(section)}</span>
+            </span>
+            <div>
+              <small>
+                Parte {sectionIndex + 1} de {Object.keys(groupedQuestions).length}
+              </small>
+              <h2>{section}</h2>
+            </div>
+          </div>
           <div className="activityFields">
             {sectionQuestions.map((question) => {
               if (!shouldShow(question)) {
@@ -107,11 +125,17 @@ export function ActivityForm({ courseSlug, lessonId, activityId, questions, subm
 
       <div className="activityActions">
         {isLocked ? <span className="lockedSubmission">Respostas enviadas e bloqueadas para edição.</span> : null}
+        <Link className="activityBackAction" href={`/cursos/${courseSlug}/aulas/${lessonId}`}>
+          <span className="material-symbols-outlined">arrow_back</span>
+          Voltar
+        </Link>
         <button disabled={isLocked} name="_mode" type="submit" value="draft">
+          <span className="material-symbols-outlined">save</span>
           Salvar rascunho
         </button>
         <button className="primary" disabled={isLocked} name="_mode" type="submit" value="submitted">
           Enviar atividade
+          <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
     </form>
@@ -120,12 +144,16 @@ export function ActivityForm({ courseSlug, lessonId, activityId, questions, subm
 
 function ManifestoForm({
   action,
+  courseSlug,
   isLocked,
+  lessonId,
   questions,
   submissionStatus
 }: {
   action: (formData: FormData) => void;
+  courseSlug: string;
   isLocked: boolean;
+  lessonId: string;
   questions: Question[];
   submissionStatus?: string;
 }) {
@@ -266,11 +294,17 @@ function ManifestoForm({
 
       <div className="activityActions">
         {isLocked ? <span className="lockedSubmission">Respostas enviadas e bloqueadas para edição.</span> : null}
+        <Link className="activityBackAction" href={`/cursos/${courseSlug}/aulas/${lessonId}`}>
+          <span className="material-symbols-outlined">arrow_back</span>
+          Voltar
+        </Link>
         <button disabled={isLocked} name="_mode" type="submit" value="draft">
+          <span className="material-symbols-outlined">save</span>
           Salvar rascunho
         </button>
         <button className="primary" disabled={isLocked} name="_mode" type="submit" value="submitted">
           Enviar compromisso
+          <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
     </form>
@@ -315,16 +349,19 @@ function QuestionInput({
 
   if (question.question_type === "money") {
     return (
-      <input
-        defaultValue={answer?.value_number ?? ""}
-        disabled={disabled}
-        min="0"
-        name={question.id}
-        placeholder="0,00"
-        required={question.is_required}
-        step="0.01"
-        type="number"
-      />
+      <span className="moneyField">
+        <b>R$</b>
+        <input
+          defaultValue={answer?.value_number ?? ""}
+          disabled={disabled}
+          min="0"
+          name={question.id}
+          placeholder="0,00"
+          required={question.is_required}
+          step="0.01"
+          type="number"
+        />
+      </span>
     );
   }
 
@@ -388,6 +425,45 @@ function QuestionInput({
     );
   }
 
+  if (question.question_type === "select") {
+    const options = getSelectOptions(question.metadata?.options);
+
+    if (question.metadata?.display === "cards") {
+      return (
+        <div className="profileChoiceGrid">
+          {options.map((option, index) => (
+            <label className="profileChoice" key={option.value}>
+              <input
+                defaultChecked={answer?.value_text === option.value}
+                disabled={disabled}
+                name={question.id}
+                required={question.is_required}
+                type="radio"
+                value={option.value}
+              />
+              <span className="profileChoiceNumber">{index + 1}</span>
+              <span className="profileChoiceText">{option.label}</span>
+              <span className="material-symbols-outlined profileChoiceCheck">check_circle</span>
+            </label>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <select defaultValue={answer?.value_text || ""} disabled={disabled} name={question.id} required={question.is_required}>
+        <option disabled value="">
+          Selecione uma opção
+        </option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
   return (
     <input
       defaultValue={answer?.value_text || ""}
@@ -409,4 +485,47 @@ function translateStatus(status: string) {
   }
 
   return "Rascunho";
+}
+
+function getSectionIcon(section: string) {
+  const normalized = section.toLocaleLowerCase("pt-BR");
+
+  if (normalized.includes("finance") || normalized.includes("capital") || normalized.includes("patrim")) {
+    return "payments";
+  }
+
+  if (normalized.includes("meta") || normalized.includes("objetivo")) {
+    return "flag";
+  }
+
+  if (normalized.includes("diagn")) {
+    return "monitoring";
+  }
+
+  return "edit_note";
+}
+
+function getSelectOptions(rawOptions: unknown): SelectOption[] {
+  if (!Array.isArray(rawOptions)) {
+    return [];
+  }
+
+  return rawOptions.flatMap((option) => {
+    if (typeof option === "string") {
+      return [{ label: option, value: option }];
+    }
+
+    if (
+      option &&
+      typeof option === "object" &&
+      "label" in option &&
+      "value" in option &&
+      typeof option.label === "string" &&
+      typeof option.value === "string"
+    ) {
+      return [{ label: option.label, value: option.value }];
+    }
+
+    return [];
+  });
 }

@@ -67,31 +67,104 @@ export default async function ActivityPage({
         : undefined
     }));
 
+  const isCompleted = submission?.status === "submitted" || submission?.status === "reviewed";
+  const statusLabel = isCompleted ? "Concluída" : submission?.status === "draft" ? "Rascunho salvo" : "Não iniciada";
+
   return (
-    <main className="activityPage">
-      <header className="activityHeader">
-        <Link href={`/cursos/${courseSlug}/aulas/${lessonId}`}>
+    <div className="activityExperience">
+      <header className="activityTopbar">
+        <Link className="activityBrand" href="/cursos">
+          <img alt="CR Mentoria" src="/assets/cr-mentoria-logo.png" />
+        </Link>
+        <Link className="activityTopbarBack" href={`/cursos/${courseSlug}/aulas/${lessonId}`}>
           <span className="material-symbols-outlined">arrow_back</span>
           Voltar para aula
         </Link>
-        <p className="eyebrow">Atividades e Exercícios</p>
-        <h1>{activity.title}</h1>
-        {saved === "locked" ? (
-          <div className="savedNotice">Esta atividade já foi enviada e não pode mais ser alterada.</div>
-        ) : saved ? (
-          <div className="savedNotice">Atividade salva com sucesso.</div>
-        ) : null}
       </header>
 
-      {activity.description ? <section className="activityManifesto">{activity.description}</section> : null}
+      <main className="activityPage">
+        <header className="activityHeader">
+          <p className="eyebrow">Atividades e exercícios</p>
+          <h1>{activity.title}</h1>
+          <p className="activitySubtitle">
+            Responda com atenção e transforme o conteúdo da aula em decisões práticas para sua jornada.
+          </p>
+          {saved === "locked" ? (
+            <div className="savedNotice">
+              <span className="material-symbols-outlined">lock</span>
+              Esta atividade já foi enviada e não pode mais ser alterada.
+            </div>
+          ) : saved ? (
+            <div className="savedNotice">
+              <span className="material-symbols-outlined">check_circle</span>
+              Atividade salva com sucesso.
+            </div>
+          ) : null}
+        </header>
 
-      <ActivityForm
-        activityId={activityId}
-        courseSlug={courseSlug}
-        lessonId={lessonId}
-        questions={questions}
-        submissionStatus={submission?.status}
-      />
-    </main>
+        <section className="activityProgress" aria-label={`Status da atividade: ${statusLabel}`}>
+          <div>
+            <strong>Progresso da atividade</strong>
+            <span>{statusLabel}</span>
+          </div>
+          <div className="activityProgressTrack">
+            <span className={isCompleted ? "complete" : submission?.status === "draft" ? "draft" : ""} />
+          </div>
+          <div className="activityProgressSteps" aria-hidden="true">
+            <i className="active" />
+            <i className={submission?.status ? "active" : ""} />
+            <i className={isCompleted ? "active" : ""} />
+          </div>
+        </section>
+
+        <div className="activityLayout">
+          <div className="activityMainColumn">
+            {activity.description ? <section className="activityManifesto">{activity.description}</section> : null}
+
+            <ActivityForm
+              activityId={activityId}
+              courseSlug={courseSlug}
+              lessonId={lessonId}
+              questions={questions}
+              submissionStatus={submission?.status}
+            />
+          </div>
+
+          <aside className="activityAside">
+            <section className="activityGuideCard">
+              <span className="material-symbols-outlined activityGuideIcon">assignment</span>
+              <p className="eyebrow">Como preencher</p>
+              <h2>{isCompleted ? "Atividade concluída" : "Transforme reflexão em ação"}</h2>
+              <ul>
+                <li>
+                  <span className="material-symbols-outlined">check_circle</span>
+                  Responda com informações reais do seu momento atual.
+                </li>
+                <li>
+                  <span className="material-symbols-outlined">check_circle</span>
+                  Salve como rascunho para continuar depois.
+                </li>
+                <li>
+                  <span className="material-symbols-outlined">check_circle</span>
+                  Revise antes de enviar: o envio bloqueia novas edições.
+                </li>
+              </ul>
+              <div className="activityGuideStatus">
+                <span>Status atual</span>
+                <strong>{statusLabel}</strong>
+              </div>
+            </section>
+
+            <section className="activityTipCard">
+              <span className="material-symbols-outlined">lightbulb</span>
+              <div>
+                <strong>Dica dos mentores</strong>
+                <p>Prefira respostas específicas, com números, prazos e próximos passos sempre que possível.</p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
   );
 }
