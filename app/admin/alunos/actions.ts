@@ -70,7 +70,12 @@ export async function createPlatformUser(formData: FormData) {
   }
 
   const existingUser = existingUsers.users.find((item) => item.email?.toLowerCase() === email);
-  const redirectTo = `${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/definir-senha`;
+  const configuredAppUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL;
+  const publicAppUrl =
+    configuredAppUrl && !configuredAppUrl.includes("localhost")
+      ? configuredAppUrl.replace(/\/$/, "")
+      : "https://app.construtoresderiqueza.com.br";
+  const redirectTo = `${publicAppUrl}/definir-senha`;
   let invitedUser = existingUser || null;
 
   if (!invitedUser) {
